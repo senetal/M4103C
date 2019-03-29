@@ -23,18 +23,23 @@ function supprimer_recherche(e)
 	setCookie('recherches',JSON.stringify(recherches),1000);
 }
 
-
+//APPEL A maj_resultats NON FONCTIONNEL
 function selectionner_recherche(e)
 {
 	recherche_courante=e.innerHTML;
 	$("#zone_saisie").val(recherche_courante);
+	var rech = getCookie(recherche_courante);
+	if (rech) recherche_courante_news = JSON.parse(rech);
+	for (var i = 0; i < recherche_courante_news.length; i++) {
+		maj_resultats(JSON.stringify(recherche_courante_news));
+	}
 }
 
 
 function init()
 {
 	$("#zone_saisie").val('');
-	cookie_rech=$.cookie('recherches');
+	var cookie_rech=$.cookie('recherches');
 	if(cookie_rech){
 		recherches=JSON.parse(cookie_rech);
 		for (var i=0;i<recherches.length;i++) {
@@ -46,12 +51,19 @@ function init()
 	}
 }
 
-
+//A TESTER ET FINIR
 function rechercher_nouvelles()
 {
-	$("#resultats").val('');
+	$("#resultats").html('');
 	$("#wait").show(0);
-	$.get('search.php?data='+$("#zone_saisie").val(),maj_resultats)
+	var rech = getCookie(recherche_courante);
+	if(rech){
+		recherche_courante_news=JSON.parse(rech);
+		maj_resultats(rech);
+	}
+	else {
+		$.get('search.php?data='+$('#zone_saisie').val(),maj_resultats);
+	}
 }
 
 
@@ -76,17 +88,36 @@ function sauver_nouvelle(e)
 {
 	$(e).html('<img src="disk15.jpg"/>')
 	.attr("onclick","supprimer_nouvelle(this)");
-	var objet;
-	console.log($(e).parent());
-	objet.titre = $(e).parent("a").html();
-	objet.url = $(e).parent("a").attr("href");
-	objet.date = $(e).parent("span:first-child").html();
+
+	var objet = {titre:'',url:'',date:''};
+	var a = $(e).parent().children("a")[0];
+
+	objet.titre = a.firstChild;
+	objet.url = a.getAttribute("href");
+	objet.date = $(e).parent().children("span")[0].innerHTML;
+
+	if (recherche_courante_news.indexOf(objet) == -1) {
+		recherche_courante_news.push(objet);
+	}
+	setCookie(recherche_courante,JSON.stringify(recherche_courante_news),1000);
 }
 
 
 function supprimer_nouvelle(e)
 {
+	$(e).html('<img src="horloge15.jpg"/>')
+	.attr("onclick","sauver_nouvelle(this)");
 
+	var objet = {titre:'',url:'',date:''};
+	var a = $(e).parent().children("a")[0];
+
+	objet.titre = a.firstChild;
+	objet.url = a.getAttribute("href");
+	objet.date = $(e).parent().children("span")[0].innerHTML;
+
+	recherche_courante_news.splice(recherche_courante_news.indexOf(objet));
+
+	setCookie(recherche_courante,JSON.stringify(recherche_courante_news),1000);
 }
 
 function setCookie(cname, cvalue, exdays) {
