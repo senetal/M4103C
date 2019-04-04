@@ -6,9 +6,9 @@ model.recherche_courante_news=[];
 model.ajouter_recherche = function(rech){
 	if(model.recherches.indexOf(rech)==-1){
 		model.recherches.push(rech);
-		view.get_recherches_stockees().append('<p class="titre-recherche"><label onclick="selectionner_recherche(this)">'
+		view.get_recherches_stockees().append('<p class="titre-recherche"><label onclick="controler.selectionner_recherche(this)">'
 		+rech
-		+'</label><img src="croix30.jpg" class="icone-croix" onclick="supprimer_recherche(this)"/> </p>'
+		+'</label><img src="croix30.jpg" class="icone-croix" onclick="controler.supprimer_recherche(this)"/> </p>'
 		);
 	}
 	model.setCookie('model.recherches',JSON.stringify(model.recherches),1000);
@@ -57,7 +57,6 @@ model.rechercher_nouvelles = function(zone_saisie)
 	else {
 		$.get('search.php?data='+zone_saisie.val(),controler.maj_resultats);
 	}
-
 }
 
 model.maj_resultats = function(res,resultat)
@@ -78,7 +77,7 @@ model.maj_resultats = function(res,resultat)
 model.sauver_nouvelle = function(e)
 {
 	e.html('<img src="disk15.jpg"/>')
-	.attr("onclick","supprimer_nouvelle(this)");
+	.attr("onclick","controler.supprimer_nouvelle(this)");
 
 	var objet = {titre:'',url:'',date:''};
 	var a = $(e).parent().children("a")[0];
