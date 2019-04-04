@@ -31,7 +31,7 @@ model.selectionner_recherche = function(e)
 		maj_resultats(JSON.stringify(model.recherche_courante_news));
 	}
 }
-
+//
 model.init = function()
 {
 	var cookie_rech=model.getCookie('model.recherches');
