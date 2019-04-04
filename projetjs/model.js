@@ -32,20 +32,6 @@ model.selectionner_recherche = function(e)
 	}
 }
 
-model.init = function()
-{
-	var cookie_rech=model.getCookie('model.recherches');
-	if(cookie_rech){
-		model.recherches=JSON.parse(cookie_rech);
-		for (var i=0;i<model.recherches.length;i++) {
-			view.get_recherches_stockees().append('<p class="titre-recherche"><label onclick="controler.selectionner_recherche(this)">'
-			+model.recherches[i]
-			+'</label><img src="croix30.jpg" class="icone-croix" onclick="controler.supprimer_recherche(this)"/> </p>'
-			);
-		}
-	}
-}
-
 //A TESTER ET FINIR
 model.rechercher_nouvelles = function(zone_saisie)
 {
