@@ -2,6 +2,7 @@ var model = {};
 model.recherche_courante="";
 model.recherches=[];
 model.recherche_courante_news=[];
+model.available_tags=[]
 
 model.ajouter_recherche = function(rech,rech_stockees){
 	if(model.recherches.indexOf(rech)==-1){
@@ -45,6 +46,7 @@ model.rechercher_nouvelles = function(zone_saisie)
 	// 	controler.maj_resultats(rech);
 	// }
 	// else {
+		model.available_tags.push(zone_saisie.val());
 		$.get('search.php?data='+zone_saisie.val(),controler.maj_resultats);
 	//}
 }
