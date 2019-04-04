@@ -58,10 +58,15 @@ model.maj_resultats = function(res,resultat)
 	var result=[];
 	try{
 		result=JSON.parse(res);
+		result.sort(function(a,b){
+			if(format(a.date)<format(b.date)) return -1;
+			if(format(a.date)>format(b.date)) return 1;
+			return 0;
+		});
 	}catch(e){}
 	for(var i=0;i<result.length;i++){
 		var img='horloge';
-		if(model.recherche_courante_news.indexOf(result[i])!=-1) img='disk';
+		//if(model.recherche_courante_news.indexOf(result[i])!=-1) img='disk';
 		resultat.append('<p class="titre_result"><a class="titre_news" href="' //elever le $.resultat
 		+result[i].url
 		+'" target="_blank">'
