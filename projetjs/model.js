@@ -67,7 +67,7 @@ model.maj_resultats = function(res,resultat)
 	for(var i=0;i<result.length;i++){
 		var img='horloge';
 		//if(model.recherche_courante_news.indexOf(result[i])!=-1) img='disk';
-		resultat.append('<p class="titre_result"><a class="titre_news" href="' //elever le $.resultat
+		resultat.append('<p class="titre_result"><a class="titre_news" href="'
 		+result[i].url
 		+'" target="_blank">'
 		+result[i].titre
