@@ -3,7 +3,8 @@ var controler = {};
 controler.init = function(){
 	controler.clear_zone_saisie();
 	view.get_element('#zone_saisie').autocomplete({source : model.available_tags});
-	var cookie_rech=model.getCookie('model.recherches');
+	//var cookie_rech=model.getCookie('model.recherches');
+	var cookie_rech=model.getStore('model.recherches');
 	if(cookie_rech){
 		model.recherches=JSON.parse(cookie_rech);
 		for (var i=0;i<model.recherches.length;i++) {
