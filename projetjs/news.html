@@ -13,7 +13,7 @@
 		</div>
 		<h3 class="titre">nouvelle recherche</h3>
 		<div id="nouvelle-recherche">
-			<input type="text" name="zone_saisie" id="zone_saisie"/>
+			<input type="text" name="zone_saisie" id="zone_saisie" onkeypress="controler.lancer_recherche(this,event)"/>
 			<img class="icone-disk" src="disk30.jpg" onclick="controler.ajouter_recherche()" />
 			<BR/>
 			<input type="button" value="OK" onclick="controler.rechercher_nouvelles()"/>

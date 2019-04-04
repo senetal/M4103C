@@ -28,7 +28,6 @@ controler.selectionner_recherche = function(e){
 	model.selectionner_recherche(e);
 }
 
-//A TESTER ET FINIR
 controler.rechercher_nouvelles = function(){
 	controler.clear_resultats();
 	view.show_wait();
@@ -62,4 +61,8 @@ controler.clear_zone_saisie = function(){
 
 controler.clear_resultats = function(){
 	view.get_element('#resultats').html('');
+}
+
+controler.lancer_recherche = function(t,e){
+	if(e.key=="Enter") controler.rechercher_nouvelles();
 }
