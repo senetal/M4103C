@@ -50,7 +50,7 @@ model.init = function()
 model.rechercher_nouvelles = function(zone_saisie)
 {
 	var rech = model.getCookie(model.recherche_courante);
-	if(rech==undefined){
+	if(rech!=undefined){
 		model.recherche_courante_news=JSON.parse(rech);
 		controler.maj_resultats(rech);
 	}
