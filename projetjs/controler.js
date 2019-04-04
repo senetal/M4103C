@@ -1,19 +1,5 @@
 var controler = {};
 
-controler.ajouter_recherche = function(){
-	var rech = view.get_zone_saisie();
-	view.clear_zone_saisie();
-	model.ajouter_recherche(rech);
-}
-
-controler.supprimer_recherche = function(e){
-	model.supprimer_recherche(e);
-}
-
-controler.selectionner_recherche = function(e){
-	model.selectionner_recherche(e);
-}
-
 controler.init = function(){
 	view.clear_zone_saisie();
 	var cookie_rech=model.getCookie('model.recherches');
@@ -26,6 +12,20 @@ controler.init = function(){
 			);
 		}
 	}
+}
+
+controler.ajouter_recherche = function(){
+	var rech = view.get_zone_saisie();
+	view.clear_zone_saisie();
+	model.ajouter_recherche(rech);
+}
+
+controler.supprimer_recherche = function(e){
+	model.supprimer_recherche(e);
+}
+
+controler.selectionner_recherche = function(e){
+	model.selectionner_recherche(e);
 }
 
 //A TESTER ET FINIR
