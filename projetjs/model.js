@@ -47,23 +47,24 @@ model.init = function()
 }
 
 //A TESTER ET FINIR
-model.rechercher_nouvelles = function()
+model.rechercher_nouvelles = function(zone_saisie)
 {
 	var rech = model.getCookie(model.recherche_courante);
-	if(rech){
+	if(rech==undefined){
 		model.recherche_courante_news=JSON.parse(rech);
 		controler.maj_resultats(rech);
 	}
 	else {
-		$.get('search.php?data='+$('#zone_saisie').val(),model.maj_resultats);
+		$.get('search.php?data='+zone_saisie.val(),controler.maj_resultats);
 	}
+
 }
 
-model.maj_resultats = function(res)
+model.maj_resultats = function(res,resultat)
 {
 	var result=JSON.parse(res);
 	for(var i=0;i<result.length;i++){
-		$("#resultats").append('<p class="titre_result"><a class="titre_news" href="' //elever le $.resultat
+		resultat.append('<p class="titre_result"><a class="titre_news" href="' //elever le $.resultat
 		+result[i].url
 		+'" target="_blank">'
 		+result[i].titre
