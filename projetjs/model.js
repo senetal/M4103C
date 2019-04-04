@@ -3,10 +3,10 @@ model.recherche_courante="";
 model.recherches=[];
 model.recherche_courante_news=[];
 
-model.ajouter_recherche = function(rech){
+model.ajouter_recherche = function(rech,rech_stockees){
 	if(model.recherches.indexOf(rech)==-1){
 		model.recherches.push(rech);
-		view.get_recherches_stockees().append('<p class="titre-recherche"><label onclick="controler.selectionner_recherche(this)">'
+		rech_stockees.append('<p class="titre-recherche"><label onclick="controler.selectionner_recherche(this)">'
 		+rech
 		+'</label><img src="croix30.jpg" class="icone-croix" onclick="controler.supprimer_recherche(this)"/> </p>'
 		);
@@ -24,11 +24,11 @@ model.supprimer_recherche = function(e)
 model.selectionner_recherche = function(e)
 {
 	model.recherche_courante=e.innerHTML;
-	view.set_zone_saisie(model.recherche_courante);
+	controler.set_zone_saisie(model.recherche_courante);
 	var rech = model.getCookie(model.recherche_courante);
 	if (rech) model.recherche_courante_news = JSON.parse(rech);
 	for (var i = 0; i < model.recherche_courante_news.length; i++) {
-		maj_resultats(JSON.stringify(model.recherche_courante_news));
+		controler.maj_resultats(JSON.stringify(model.recherche_courante_news));
 	}
 }
 
@@ -37,7 +37,11 @@ model.rechercher_nouvelles = function(zone_saisie)
 {
 	var rech = model.getCookie(model.recherche_courante);
 	if(rech!=undefined){
+		try{
 		model.recherche_courante_news=JSON.parse(rech);
+	}catch(e){
+		console.log(rech);
+	}
 		controler.maj_resultats(rech);
 	}
 	else {
@@ -49,13 +53,16 @@ model.maj_resultats = function(res,resultat)
 {
 	var result=JSON.parse(res);
 	for(var i=0;i<result.length;i++){
+		var img='horloge';
+		if(model.recherche_courante_news.indexOf(result[i])!=-1) img='disk';
+		console.log(result[i].titre);
 		resultat.append('<p class="titre_result"><a class="titre_news" href="' //elever le $.resultat
 		+result[i].url
 		+'" target="_blank">'
 		+result[i].titre
 		+'</a><span class="date_news">'
 		+format(result[i].date)
-		+'</span><span class="action_news" onclick="controler.sauver_nouvelle(this)"><img src="horloge15.jpg"/></span></p>'
+		+'</span><span class="action_news" onclick="controler.sauver_nouvelle(this)"><img src="'+img+'15.jpg"/></span></p>'
 		);
 	}
 }
@@ -67,8 +74,9 @@ model.sauver_nouvelle = function(e)
 
 	var objet = {titre:'',url:'',date:''};
 	var a = $(e).parent().children("a")[0];
+	console.log(a);
+	objet.titre = a.innerHTML;
 
-	objet.titre = a.firstChild;
 	objet.url = a.getAttribute("href");
 	objet.date = $(e).parent().children("span")[0].innerHTML;
 
