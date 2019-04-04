@@ -1,6 +1,6 @@
 var view = {};
 
-view.get_zone_saisie = function(){
+view.get_saisie = function(){
 	return $("#zone_saisie").val();
 }
 

@@ -15,7 +15,7 @@ controler.init = function(){
 }
 
 controler.ajouter_recherche = function(){
-	var rech = view.get_zone_saisie();
+	var rech = view.get_saisie();
 	controler.clear_zone_saisie();
 	model.ajouter_recherche(rech,view.get_recherches_stockees());
 }
