@@ -34,6 +34,7 @@ model.selectionner_recherche = function(e)
 
 model.init = function()
 {
+	console.log("hello");
 	var cookie_rech=model.getCookie('model.recherches');
 	if(cookie_rech){
 		model.recherches=JSON.parse(cookie_rech);
@@ -49,14 +50,15 @@ model.init = function()
 //A TESTER ET FINIR
 model.rechercher_nouvelles = function()
 {
-	var rech = model.getCookie(model.recherche_courante);
-	if(rech){
-		model.recherche_courante_news=JSON.parse(rech);
-		controler.maj_resultats(rech);
-	}
-	else {
-		$.get('search.php?data='+$('#zone_saisie').val(),model.maj_resultats);
-	}
+	// var rech = model.getCookie(model.recherche_courante);
+	// if(rech){
+	// 	console.log(rech);
+	// 	model.recherche_courante_news=JSON.parse(rech);
+	// 	controler.maj_resultats(rech);
+	// }
+	// else {
+		$.get('search.php?data='+view.get_zone_saisie(),controler.maj_resultats);
+	// }
 }
 
 model.maj_resultats = function(res)

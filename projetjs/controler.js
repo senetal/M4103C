@@ -28,6 +28,7 @@ controler.rechercher_nouvelles = function(){
 
 controler.maj_resultats = function(res){
 	view.hide_wait();
+	console.log("hello maj res");
 	model.maj_resultats(res);
 }
 
