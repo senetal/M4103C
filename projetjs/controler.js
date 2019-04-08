@@ -12,6 +12,7 @@ controler.init = function(){
 			);
 		}
 	}
+	
 }
 
 controler.ajouter_recherche = function(){
