@@ -13,7 +13,7 @@
 		</div>
 		<h3 class="titre">nouvelle recherche</h3>
 		<div id="nouvelle-recherche">
-			<input type="text" name="zone_saisie" id="zone_saisie"/>
+			<input type="text" name="zone_saisie" id="zone_saisie" onkeypress="controler.lancer_recherche(this,event)"/>
 			<img class="icone-disk" src="disk30.jpg" onclick="controler.ajouter_recherche()" />
 			<BR/>
 			<input type="button" value="OK" onclick="controler.rechercher_nouvelles()"/>
@@ -27,6 +27,7 @@
 		</div>
 	<script src="jquery-3.2.1.js"></script>
    <script src="jquery.cookie.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="util.js"></script>
 	<script src="view.js" charset="utf-8"></script>
 	<script src="model.js" charset="utf-8"></script>
